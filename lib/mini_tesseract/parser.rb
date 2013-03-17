@@ -29,7 +29,7 @@ module MiniTesseract
         image = if [@x, @y, @w, @h].any?(&:nil?)
           @image
         else
-          @image.crop!(@x, @y, @w, @h)
+          @image.crop(@x, @y, @w, @h)
         end
 
         image.write(tmp_file)
