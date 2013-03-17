@@ -25,8 +25,14 @@ module MiniTesseract
 
       def image_to_tiff
         tmp_file = Pathname.new(Dir::tmpdir).join("#{unique_id}.tif").to_s
-        @image.crop!(@x, @y, @w, @h) unless [@x, @y, @w, @h].compact == []
-        @image.write(tmp_file)
+
+        image = if [@x, @y, @w, @h].any?(&:nil?)
+          @image
+        else
+          @image.crop!(@x, @y, @w, @h)
+        end
+
+        image.write(tmp_file)
 
         tmp_file
       end

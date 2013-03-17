@@ -23,6 +23,7 @@ Or install it yourself as:
 
 ## Usage
 
+
     # Parse an image.
     MiniTesseract::Parser.new('my-image').text
 
