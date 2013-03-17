@@ -2,7 +2,7 @@ module MiniTesseract
   class Parser
 
     def initialize(path_or_image, options = {})
-      @psm     = options.delete(:psm) || 7
+      @psm = options.delete(:psm) || 7
       @x = options.delete(:x)
       @y = options.delete(:y)
       @w = options.delete(:w)
@@ -11,7 +11,7 @@ module MiniTesseract
       @config = options.map { |k, v| "#{k} #{v}" }.join("\n")
 
       @image = if path_or_image.kind_of?(Magick::Image)
-        path_or_image
+        path_or_image.clone
       else
         Magick::Image.read(path_or_image).first
       end
@@ -24,17 +24,16 @@ module MiniTesseract
     private
 
       def image_to_tiff
+        crop_image
+
         tmp_file = Pathname.new(Dir::tmpdir).join("#{unique_id}.tif").to_s
-
-        image = if [@x, @y, @w, @h].any?(&:nil?)
-          @image
-        else
-          @image.crop(@x, @y, @w, @h)
-        end
-
-        image.write(tmp_file)
+        @image.write(tmp_file)
 
         tmp_file
+      end
+
+      def crop_image
+        @image.crop!(@x, @y, @w, @h) unless [@x, @y, @w, @h].any?(&:nil?)
       end
 
       def psm_option
