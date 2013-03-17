@@ -23,15 +23,17 @@ Or install it yourself as:
 
 ## Usage
 
-    # Parse an image.
-    MiniTesseract::Parser.new('my-image').text
+```ruby
+# Parse an image.
+MiniTesseract::Parser.new('my-image').text
 
-    # Specify a page mode (see tesseract documentation).
-    MiniTesseract::Parser.new('my-image', psm: 10).text
+# Specify a page mode (see tesseract documentation).
+MiniTesseract::Parser.new('my-image', psm: 10).text
 
-    # Parse a specific region of the image.
-    MiniTesseract::Parser.new('my-big-image',
-                              x: 50, y: 50, w: 100, h: 100).text
+# Parse a specific region of the image.
+MiniTesseract::Parser.new('my-big-image',
+                           x: 50, y: 50, w: 100, h: 100).text
+```
 
 ## Contributing
 
