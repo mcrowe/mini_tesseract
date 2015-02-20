@@ -11,7 +11,7 @@ Install the tesseract ocr engine, and imagemagick. On a mac, do:
 
 Add this line to your application's Gemfile:
 
-    gem 'mini_tesseract'
+    gem 'mini_tesseract', git: 'git@github.com:mcrowe/mini_tesseract.git'
 
 And then execute:
 
